@@ -1,27 +1,40 @@
+import React from "react";
+import moment from 'moment';
+import { activeNote } from "../../actions/notes";
+import { useDispatch } from "react-redux";
 
+export const JournalEntry = ({ id, body, date, title, url }) => {
 
-import React from 'react'
+    const noteDate = moment(date);
 
-export const JournalEntry = () => {
-  return (
-    <div className="journal__entry pointer">
-        <div className="journal__entry-picture"
-        style={{
-            backgroundSize: "cover",
-            backgroundImage: "url(https://www.ngenespanol.com/wp-content/uploads/2018/08/La-primera-imagen-de-la-historia-1280x720.jpg)"
-        }}></div>
+    const dispatch = useDispatch();
+
+    const handleEntryClick = async() => {
+        
+        dispatch(activeNote( id, {id, body, date, title, url} ));
+        
+    }
+
+    return (
+        <div className="journal__entry pointer animate__animated animate__fadeIn" onClick={ handleEntryClick }>
+        {
+            url &&
+                <div
+                className="journal__entry-picture"
+                style={{
+                    backgroundSize: "cover",
+                    backgroundImage: `url(${url})`,
+                }}
+                ></div>
+        }
         <div className="journal__entry-body">
-            <p className="journal__entry-title">
-                Un nuevo día
-            </p>
-            <p className="journal__entry-content">
-                Reprehenderit anim occaecat officia nisi cupidatat deserunt. Consectetur ad nostrud voluptate aliquip ad aliquip. Reprehenderit mollit ea irure nulla do. Dolore elit occaecat ut qui ad velit voluptate ex.
-            </p>
+            <p className="journal__entry-title">{title}</p>
+            <p className="journal__entry-content">{body}</p>
         </div>
         <div className="journal__entry-date-box">
-            <span>Monday</span>
-            <h4>28</h4>
+            <span>{ noteDate.format('dddd') }</span>
+            <h4>{ noteDate.format('do') }</h4>
         </div>
-    </div>
-  )
-}
+        </div>
+    );
+};
