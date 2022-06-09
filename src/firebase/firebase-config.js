@@ -4,15 +4,33 @@ import 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB6ULAOw080zRO7SqziGRy1LRb8w-BBGJQ",
-  authDomain: "react-journalapp-udemy.firebaseapp.com",
-  projectId: "react-journalapp-udemy",
-  storageBucket: "react-journalapp-udemy.appspot.com",
-  messagingSenderId: "822777173360",
-  appId: "1:822777173360:web:d7af40268dccaba8d56bb5"
+  apiKey: process.env.REACT_APP_FIREBASE_CONFIG_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_CONFIG_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_CONFIG_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_CONFIG_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_CONFIG_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_CONFIG_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_CONFIG_APPID
 };
 
-// Initialize Firebase
+// const firebaseConfigTest = {
+//   apiKey: "AIzaSyCd9dLsxd6cJTdDxz5gjgXbjx8S8MX_iWQ",
+//   authDomain: "react-app-udemy-2e1fd.firebaseapp.com",
+//   databaseURL: "https://react-app-udemy-2e1fd-default-rtdb.firebaseio.com",
+//   projectId: "react-app-udemy-2e1fd",
+//   storageBucket: "react-app-udemy-2e1fd.appspot.com",
+//   messagingSenderId: "1031071313359",
+//   appId: "1:1031071313359:web:98e5f7ae7c92195b2cb6ba"
+// };
+
+// if( process.env.NODE_ENV === 'test') {
+//   // testing
+//   firebase.initializeApp(firebaseConfigTest);
+// } else {
+//   // des / production
+//   firebase.initializeApp(firebaseConfig);
+// }
+
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
